@@ -1,4 +1,4 @@
-// MissileSim.cpp
+﻿// MissileSim.cpp
 #include "MissileSim.h"
 #include "MissileCore.h"
 
@@ -14,7 +14,28 @@ namespace XXX_MissileSim {
             return new MissileCore();
         }
 
+		MISSILE_SIM_API void* CopyMissile(void* sourcemissile) {
+			if (sourcemissile == nullptr)
+			{
+				return nullptr;
+			}
+			MissileCore* src = static_cast<MissileCore*>(sourcemissile);
+			return new MissileCore(*src);
+		}
 
+		MISSILE_SIM_API void AssignMissile(void* targetmissile, void* sourcemissile) {
+			if (targetmissile==nullptr || sourcemissile==nullptr)
+			{
+				return;
+			}
+			else
+			{
+				MissileCore* src = static_cast<MissileCore*>(sourcemissile);
+				MissileCore* tgt = static_cast<MissileCore*>(targetmissile);
+				*tgt = *src;
+			}
+		
+		}
 
         MISSILE_SIM_API void InitializeMissile(void* missile, const InitParams* params) {
             if (missile && params) {
@@ -44,14 +65,6 @@ namespace XXX_MissileSim {
             }
         }
 
-		MISSILE_SIM_API OutputParams GetMissileState_C(void* missile)
-		{
-			if (missile)
-			{
-				MissileCore* mc = static_cast<MissileCore*>(missile);
-			}
-			return  OutputParams();
-		}
 
 #ifdef __cplusplus
     }

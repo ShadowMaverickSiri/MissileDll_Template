@@ -1,39 +1,44 @@
-#ifndef MISSILE_CORE_H
+ï»¿#ifndef MISSILE_CORE_H
 #define MISSILE_CORE_H
 #include "MissileSim.h"  
-#include <iostream>
 
 
-namespace MissileSimInternal {//×îºÃ¼ÓÉÏÃüÃû¿Õ¼ä
+
+namespace MissileSimInternal {//æœ€å¥½åŠ ä¸Šå‘½åç©ºé—´
 	
-	//µ¼µ¯ÄÚ²¿ÊµÏÖÀà
+	//å¯¼å¼¹å†…éƒ¨å®ç°ç±»
     class MissileCore {
     public:
         MissileCore();
         ~MissileCore();
 
-		MissileCore(const MissileCore& aSrc);				//¸´ÖÆ¹¹Ôìº¯Êı
-		//MissileCore& operator = (const MissileCore &aSrc)=delete; //½ûÖ¹¿½±´¸³Öµ
+		MissileCore(const MissileCore& aSrc);	//å¤åˆ¶æ„é€ å‡½æ•°
+		//MissileCore& operator = (const MissileCore &aSrc)=delete; //ç¦æ­¢æ‹·è´èµ‹å€¼ï¼ˆç‰¹æ®Šæƒ…å†µä¸‹ä½¿ç”¨ï¼‰
 
-		MissileCore& operator = (const MissileCore& aSrc) ;
-		//³õÊ¼»¯º¯Êı
+		MissileCore& operator = (const MissileCore& aSrc) ; //æ‹·è´èµ‹å€¼å‡½æ•°
+
+		//åˆå§‹åŒ–å‡½æ•°
         void initialize(const XXX_MissileSim::InitParams &initial); 
-		//²½½ø¸üĞÂº¯Êı
+
+		//æ­¥è¿›æ›´æ–°å‡½æ•°
         void update(const XXX_MissileSim::UpdateParams &update);
-		//µ¼µ¯ÄÚ²¿Êı¾İ»ñÈ¡
+
+		//å¯¼å¼¹å†…éƒ¨æ•°æ®è·å–
         void getState(XXX_MissileSim::OutputParams &out )const;
 
+		static size_t count;		//è®°å½•è¿™ä¸ªç±»è¢«ä½¿ç”¨äº†å¤šå°‘æ¬¡ ï¼ˆæ³¨æ„ï¼Œæ˜¯é™æ€å˜é‡ï¼‰
 
-		static size_t count;		//¼ÇÂ¼Õâ¸öÀà±»Ê¹ÓÃÁË¶àÉÙ´Î
     private:
-		class SubModels; //¶¨Òåµ¼µ¯×ÓÄ£¿é¹ÜÀíÀà£¬Ç°ÏòÒıÓÃÓÃÉùÃ÷
-		SubModels* mp;   //Í¨¹ı¶ÔÏóÖ¸ÕëÍ³Ò»¹ÜÀí×ÓÄ£¿éÀà £¨¾ßÌåÊµÏÖÔÚcppÎÄ¼şÖĞ£¬±ÜÃâÍ·ÎÄ¼ş±©Â¶£©
+		class SubModels; //å®šä¹‰å¯¼å¼¹å­æ¨¡å—ç®¡ç†ç±»ï¼Œå‰å‘å¼•ç”¨ç”¨å£°æ˜
+		SubModels* mp;   //é€šè¿‡å¯¹è±¡æŒ‡é’ˆç»Ÿä¸€ç®¡ç†å­æ¨¡å—ç±» ï¼ˆå…·ä½“å®ç°åœ¨cppæ–‡ä»¶ä¸­ï¼Œé¿å…å¤´æ–‡ä»¶æš´éœ²ï¼‰
 		 
-		//¿ÉÔÚ´Ë´¦¶¨ÒåÒ»Ğ©ÄÚ²¿µÄ²ÎÊı£¬Ò²¿É²»¶¨Òå
-		double id;//µ¼µ¯id
-		double Time_system;  //ÏµÍ³Ê±¼ä
+		//å¯åœ¨æ­¤å¤„å®šä¹‰ä¸€äº›é€šç”¨çš„å†…éƒ¨å‚æ•°ï¼Œå»ºè®®åœ¨è°ƒè¯•é˜¶æ®µä½¿ç”¨
+		unsigned id;   //å¯¼å¼¹id
+		double time;   //ä»¿çœŸæ—¶é—´
+		double Time_system;  //ç³»ç»Ÿæ—¶é—´
+		double Lm, Bm, Hm;   //å¯¼å¼¹ç»åº¦ï¼ˆÂ°ï¼‰ã€çº¬åº¦ï¼ˆÂ°ï¼‰ã€é«˜åº¦ï¼ˆmï¼‰
+		double Vx_n, Vy_n, Vz_n; //å¯¼å¼¹å½“åœ°åŒ—å¤©ä¸œé€Ÿåº¦ï¼ˆm/sï¼‰
 		
-
     };
 
 } // namespace MissileSimInternal

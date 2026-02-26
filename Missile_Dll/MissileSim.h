@@ -1,9 +1,9 @@
-// MissileSim.h
+ï»¿// MissileSim.h
 #ifndef MISSILE_SIM_H
 #define MISSILE_SIM_H
 
 #ifdef _WIN32
-#ifdef MISSILE_SIM_EXPORTS
+#ifndef MISSILE_SIM_EXPORTS
 #define MISSILE_SIM_API __declspec(dllexport)
 #else
 #define MISSILE_SIM_API __declspec(dllimport)
@@ -11,55 +11,56 @@
 #else
 #define MISSILE_SIM_API __attribute__((visibility("default")))
 #endif
-//½¨Òé²ÉÓÃÃüÃû¿Õ¼ä£¬±ÜÃâ±äÁ¿ÃûÎÛÈ¾£¬XXX¿É»»³É¾ßÌå´úºÅÃû³Æ
+//å»ºè®®é‡‡ç”¨å‘½åç©ºé—´ï¼Œé¿å…å˜é‡åæ±¡æŸ“ï¼ŒXXXå¯æ¢æˆå…·ä½“ä»£å·åç§°
 namespace XXX_MissileSim {  
 
-	//¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªµ¼µ¯³õÊ¼»¯º¯ÊıµÄÊäÈë½á¹¹Ìå¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª//
+	//â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”å¯¼å¼¹åˆå§‹åŒ–å‡½æ•°çš„è¾“å…¥ç»“æ„ä½“â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”//
     struct InitParams {
-        double time;						//·ÂÕæÊ±¼ä
-		double Lm0, Bm0, Hm0;				//µ¼µ¯³õÊ¼¾­Î³¸ß
-		double Vx_n0, Vy_n0, Vz_n0;			//µ¼µ¯³õÊ¼±±Ìì¶«ËÙ¶È
+		unsigned id;                        //å¯¼å¼¹ID
+        double time;						//ä»¿çœŸæ—¶é—´
+		double Lm0, Bm0, Hm0;				//å¯¼å¼¹åˆå§‹ç»çº¬é«˜
+		double Vx_n0, Vy_n0, Vz_n0;			//å¯¼å¼¹åˆå§‹åŒ—å¤©ä¸œé€Ÿåº¦
 
-        //.....¸ù¾İ¾ßÌåÇé¿öÔö¼ÓÆäËû±äÁ¿
+        //.....æ ¹æ®å…·ä½“æƒ…å†µå¢åŠ å…¶ä»–å˜é‡
     };
-	//¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªµ¼µ¯¸üĞÂº¯ÊıµÄÊäÈë½á¹¹Ìå¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª//
+	//â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”å¯¼å¼¹æ›´æ–°å‡½æ•°çš„è¾“å…¥ç»“æ„ä½“â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”//
 	
     struct UpdateParams {
-		double step;						//²½³¤
-        double time;						//·ÂÕæÊ±¼ä
-		double Lt, Bt, Ht;					//Ä¿±êÊµÊ±¾­Î³¸ß
-		double Vtx_n0, Vty_n0, Vtz_n0;		//Ä¿±êÊµÊ±±±Ìì¶«ËÙ¶È
+		double step;						//æ­¥é•¿
+        double time;						//ä»¿çœŸæ—¶é—´
+		double Lt, Bt, Ht;					//ç›®æ ‡å®æ—¶ç»çº¬é«˜
+		double Vtx_n0, Vty_n0, Vtz_n0;		//ç›®æ ‡å®æ—¶åŒ—å¤©ä¸œé€Ÿåº¦
 
-		//.....¸ù¾İ¾ßÌåÇé¿öÔö¼ÓÆäËû±äÁ¿
+		//.....æ ¹æ®å…·ä½“æƒ…å†µå¢åŠ å…¶ä»–å˜é‡
     };
-	//¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªµ¼µ¯ÄÚ²¿Êı¾İÊä³ö½á¹¹Ìå¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª//
+	//â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”å¯¼å¼¹å†…éƒ¨æ•°æ®è¾“å‡ºç»“æ„ä½“â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”//
     struct OutputParams {
-        double time;						//·ÂÕæÊ±¼ä
-        double gps[3];						//µ¼µ¯¾­Î³¸ßÎ»ÖÃ
-        double Vn[3];						//µ¼µ¯±±Ìì¶«ËÙ¶È
-		bool flag_ko;						//´İ»Ù±êÖ¾Î»
+		unsigned id;                        //å¯¼å¼¹ID
+        double time;						//ä»¿çœŸæ—¶é—´
+        double LLA[3];						//å¯¼å¼¹ç»çº¬é«˜ä½ç½®
+        double Vn[3];						//å¯¼å¼¹åŒ—å¤©ä¸œé€Ÿåº¦
+		bool flag_ko;						//æ‘§æ¯æ ‡å¿—ä½
 
-		//.....¸ù¾İ¾ßÌåÇé¿öÔö¼ÓÆäËû±äÁ¿
+		//.....æ ¹æ®å…·ä½“æƒ…å†µå¢åŠ å…¶ä»–å˜é‡
     };
 	//=================================================================================================//
 #ifdef __cplusplus
-    extern "C" { //C·ç¸ñµ¼³ö£¬±£Ö¤¼æÈİ¶àÆ½Ì¨
+    extern "C" { //Cé£æ ¼å¯¼å‡ºï¼Œä¿è¯å…¼å®¹å¤šå¹³å°
 #endif
 		 
-        MISSILE_SIM_API void* CreateMissile();			//¡¾µ¼³öº¯Êı¡¿-´´½¨µ¼µ¯¶ÔÏó
-		MISSILE_SIM_API void CopyMissile();				//¡¾µ¼³öº¯Êı¡¿-¸´ÖÆ¹¹Ôìº¯Êı
-		MISSILE_SIM_API void AssignMissile();			//¡¾µ¼³öº¯Êı¡¿-¿½±´¸³Öµº¯Êı
-        MISSILE_SIM_API void InitializeMissile(void* missile, const InitParams* params);//¡¾µ¼³öº¯Êı¡¿-³õÊ¼»¯µ¼µ¯²ÎÊı
-        MISSILE_SIM_API void UpdateMissile(void* missile, const UpdateParams* params);  //¡¾µ¼³öº¯Êı¡¿-¸üĞÂµ¼µ¯×´Ì¬
-        MISSILE_SIM_API void DestroyMissile(void* missile);   //¡¾µ¼³öº¯Êı¡¿-Ïú»Ùµ¼µ¯ÊµÌå
-		MISSILE_SIM_API void GetMissileState(void* missile, OutputParams* output); //¡¾µ¼³öº¯Êı¡¿-»ñÈ¡µ¼µ¯²ÎÊı
-		MISSILE_SIM_API OutputParams GetMissileState_C(void* missile); //¡¾µ¼³öº¯Êı¡¿-»ñÈ¡µ¼µ¯²ÎÊı
+        MISSILE_SIM_API void* CreateMissile();											 //ã€å¯¼å‡ºå‡½æ•°ã€‘-åˆ›å»ºå¯¼å¼¹å¯¹è±¡
+		MISSILE_SIM_API void* CopyMissile(void* sourcemissile);							 //ã€å¯¼å‡ºå‡½æ•°ã€‘-å¤åˆ¶æ„é€ å‡½æ•°
+		MISSILE_SIM_API void AssignMissile(void* targetmissile, void* sourcemissile );	 //ã€å¯¼å‡ºå‡½æ•°ã€‘-æ‹·è´èµ‹å€¼å‡½æ•°
+        MISSILE_SIM_API void InitializeMissile(void* missile, const InitParams* params); //ã€å¯¼å‡ºå‡½æ•°ã€‘-åˆå§‹åŒ–å¯¼å¼¹å‚æ•°
+        MISSILE_SIM_API void UpdateMissile(void* missile, const UpdateParams* params);   //ã€å¯¼å‡ºå‡½æ•°ã€‘-æ›´æ–°å¯¼å¼¹çŠ¶æ€
+        MISSILE_SIM_API void DestroyMissile(void* missile);								 //ã€å¯¼å‡ºå‡½æ•°ã€‘-é”€æ¯å¯¼å¼¹å®ä½“
+		MISSILE_SIM_API void GetMissileState(void* missile, OutputParams* output);       //ã€å¯¼å‡ºå‡½æ•°ã€‘-è·å–å¯¼å¼¹å‚æ•°
 
 #ifdef __cplusplus
     }
 #endif
 
-} // namespace MissileSim
+}
 
 #endif // MISSILE_SIM_H
 
