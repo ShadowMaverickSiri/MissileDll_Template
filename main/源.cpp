@@ -18,8 +18,8 @@ int main() {
 	// 设置控制台为UTF-8编码（解决中文乱码问题）
 	SetConsoleOutputCP(CP_UTF8);
 
-	SingleSim();
-	//MultiSim();
+	//SingleSim();
+	MultiSim();
 	return 0;
 }
 
@@ -40,21 +40,21 @@ void SingleSim()
 
 	XXX_MissileSim::OutputParams outParams = {};
 
-	std::cout << u8"=== 单弹仿真开始 ===\n";
+	std::cout << "=== 单弹仿真开始 ===\n";
 
 	while (true)
 	{
 		XXX_MissileSim::UpdateMissile(singleMissile1, &updateParams);
 		XXX_MissileSim::GetMissileState(singleMissile1, &outParams);
 
-		std::cout << u8"导弹编号:" << outParams.id
-			<< u8" 仿真时间:" << outParams.time
-			<< u8" 导弹高度:" << outParams.LLA[2]
+		std::cout << "导弹编号:" << outParams.id
+			<< " 仿真时间:" << outParams.time
+			<< " 导弹高度:" << outParams.LLA[2]
 			<< std::endl;
 
 		if (outParams.time > 10)
 		{
-			std::cout << u8"仿真结束" << std::endl;
+			std::cout << "仿真结束" << std::endl;
 			break;
 		}
 	}
